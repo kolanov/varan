@@ -92,14 +92,26 @@
 1759860961 /home/kolanov/Desktop/coding /utils/imgui/imstb_textedit.h
 	<string.h>
 
-1759866402 source:/home/kolanov/Desktop/coding /varan/utils.cpp
-
-1759867202 source:/home/kolanov/Desktop/coding /varan/main.cpp
+1759879648 source:/home/kolanov/Desktop/coding /varan/utils.cpp
 	<GL/glew.h>
 	<GLFW/glfw3.h>
+	<iostream>
+	<string>
+	<vector>
+	<cmath>
 	"imgui.h"
 	"imgui_impl_glfw.h"
 	"imgui_impl_opengl3.h"
+	"utils.h"
+
+1759954569 source:/home/kolanov/Desktop/coding /varan/main.cpp
+	<GL/glew.h>
+	<GLFW/glfw3.h>
+	<iostream>
+	"imgui.h"
+	"imgui_impl_glfw.h"
+	"imgui_impl_opengl3.h"
+	"utils.h"
 
 1759860961 /home/kolanov/Desktop/coding /utils/imgui/backends/imgui_impl_glfw.h
 	"imgui.h"
@@ -142,4 +154,14 @@
 	<windows.h>
 	<dlfcn.h>
 	<dlfcn.h>
+
+1759880510 /home/kolanov/Desktop/coding /varan/utils.h
+	<GL/glew.h>
+	<GLFW/glfw3.h>
+	<iostream>
+	<string>
+	<vector>
+	"imgui.h"
+	"imgui_impl_glfw.h"
+	"imgui_impl_opengl3.h"
 

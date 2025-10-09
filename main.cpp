@@ -1,8 +1,16 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
+#include <iostream>
+
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+
+#include "utils.h"
+
+float marginX = 15.0;
+
 
 int main() {
     glfwInit();
@@ -12,13 +20,19 @@ int main() {
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGuiIO& io = ImGui::GetIO();
+    io.FontGlobalScale = 2.0f;
+    (void)io;
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
     ImGui::StyleColorsDark();
 
-    while (!glfwWindowShouldClose(window)) {
+    // testing stuff -----------------------------------------------//
+    metaData app;
 
+
+
+    while (!glfwWindowShouldClose(window)) {
         // setting up window behavior ---------------- //
         glfwPollEvents();
         ImGui_ImplOpenGL3_NewFrame();
@@ -37,7 +51,25 @@ int main() {
 
         if (ImGui::BeginTabBar("Main tabs")) {
             if (ImGui::BeginTabItem("3d elements")) {
-                ImGui::Text("tree");
+
+
+                // button stuff ------------------------ //
+                ImGui::Dummy(ImVec2(0.0f, 10.0f));
+                ImGui::SetCursorPosX(marginX);
+                if (ImGui::Button("+", ImVec2(width - marginX*2.0f, marginX*2.0f))) {
+                    cuboid cube = {0.0f};
+                    app.cuboids.push_back(cube);
+                    std::cout << app.cuboids.size() << std::endl;
+                }
+                // ------------------------------------ //
+                ImGui::EndTabItem();
+            }
+            if (ImGui::BeginTabItem("2d elements")) {
+                ImGui::Text("am too lazy to add them for now, wait till next update");
+                ImGui::EndTabItem();
+            }
+            if (ImGui::BeginTabItem("results")) {
+                ImGui::Text("hey nigga");
                 ImGui::EndTabItem();
             }
             ImGui::EndTabBar();

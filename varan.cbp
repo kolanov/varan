@@ -43,6 +43,8 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="../utils.h" />
+		<Unit filename="../utils/imgui/backends/imgui_impl_glfw.cpp" />
+		<Unit filename="../utils/imgui/backends/imgui_impl_opengl3.cpp" />
 		<Unit filename="../utils/imgui/imconfig.h" />
 		<Unit filename="../utils/imgui/imgui.cpp" />
 		<Unit filename="../utils/imgui/imgui.h" />
