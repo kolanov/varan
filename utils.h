@@ -15,11 +15,11 @@
 
 // 3d shapes ---------------------------------------//
 struct cuboid {
-    double a;
-    double b;
-    double h;
+    double a = 1.0;
+    double b = 1.0;
+    double h = 1.0;
 
-    int repeat;
+    int repeat = 1;
     double volume();
     void render();
 };
@@ -92,7 +92,7 @@ struct metaData {
     // wait for next update lil Nigger
 
     //rendering stufff
-    void bodyHeader(std::string text, float width);
+    void bodyHeader(std::string text);
     void TextCentered(std::string text);
     void render3D();
 

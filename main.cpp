@@ -11,6 +11,7 @@
 #include "globals.h"
 
 float marginX = 15.0;
+int width, height;
 
 
 int main() {
@@ -40,7 +41,6 @@ int main() {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
         // Get current frame buffer size
-        int width, height;
         glfwGetFramebufferSize(window, &width, &height);
         ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar |ImGuiWindowFlags_NoResize |ImGuiWindowFlags_NoMove |ImGuiWindowFlags_NoScrollbar |ImGuiWindowFlags_NoCollapse;
         ImGui::SetNextWindowPos(ImVec2(0, 0));
@@ -52,17 +52,12 @@ int main() {
 
         if (ImGui::BeginTabBar("Main tabs")) {
             if (ImGui::BeginTabItem("3d elements")) {
-
+                /*
                 app.bodyHeader("cube 1", width);
                 test1.render();
+                */
+                app.render3D();
                 // button stuff ------------------------ //
-                ImGui::Dummy(ImVec2(0.0f, 10.0f));
-                ImGui::SetCursorPosX(marginX);
-                if (ImGui::Button("+", ImVec2(width - marginX*2.0f, marginX*2.0f))) {
-                    cuboid cube = {0.0f};
-                    app.cuboids.push_back(cube);
-                    std::cout << app.cuboids.size() << std::endl;
-                }
                 // ------------------------------------ //
                 ImGui::EndTabItem();
             }

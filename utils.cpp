@@ -47,6 +47,10 @@ void cuboid::render() {
     ImGui::PushItemWidth(inputWidth - 182);
     ImGui::InputInt("##r", &repeat, 0, 1);
     ImGui::PopItemWidth();
+
+    ImGui::SetCursorPosX(marginX);
+    std::string tempStr = "total volume : " + std::to_string(volume()) + " x " + std::to_string(repeat);
+    ImGui::Text(tempStr.c_str());
 }
 
 double prism::volume() {
@@ -72,10 +76,10 @@ void footing1::render() {}
 // app ------------------------------------//
 
 // rendering
-void metaData::bodyHeader(std::string text, float width) {
+void metaData::bodyHeader(std::string text) {
     ImGui::Dummy(ImVec2(0.0f, 10.0f));
     ImGui::SetCursorPosX(marginX);
-    if (ImGui::Button(text.c_str(), ImVec2(width - marginX*2.0f, marginX*2.0f))) {}
+    if (ImGui::Button(text.c_str(), ImVec2(width - marginX*2, marginX*2.0f))) {}
 }
 void metaData::TextCentered(std::string text) {
     float windowWidth = ImGui::GetWindowSize().x;
@@ -84,9 +88,26 @@ void metaData::TextCentered(std::string text) {
     ImGui::Text("%s", text.c_str());
 }
 void metaData::render3D() {
-    ImGui::Dummy(ImVec2(0.0f, 50.0f));
+    ImGui::Dummy(ImVec2(0.0f, 10.0f));
     TextCentered("cuboids volumes");
-    for
+
+    for (size_t i = 0; i < cuboids.size(); i++) {
+        bodyHeader("cube " + std::to_string(i + 1));
+        cuboids[i].render();
+        ImGui::Dummy(ImVec2(0.0f, 10.0f));
+    }
+
+// add new cube button
+    ImGui::SetCursorPosX(marginX);
+    if (ImGui::Button("+", ImVec2(width - marginX*2.0f, marginX*2.0f))) {
+        cuboid cube;        // default constructor, you can set defaults here
+        cube.a = 1.0;
+        cube.b = 1.0;
+        cube.h = 1.0;
+        cube.repeat = 1;
+        cuboids.push_back(cube);
+        std::cout << cuboids.size() << std::endl;
+    }
 }
 
 
