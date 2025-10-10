@@ -19,6 +19,7 @@ struct cuboid {
     double b;
     double h;
 
+    int repeat;
     double volume();
     void render();
 };
@@ -91,6 +92,7 @@ struct metaData {
     // wait for next update lil Nigger
 
     //rendering stufff
+    void bodyHeader(std::string text, float width);
     void TextCentered(std::string text);
     void render3D();
 

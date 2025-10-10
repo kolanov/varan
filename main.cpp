@@ -8,6 +8,7 @@
 #include "imgui_impl_opengl3.h"
 
 #include "utils.h"
+#include "globals.h"
 
 float marginX = 15.0;
 
@@ -29,7 +30,7 @@ int main() {
 
     // testing stuff -----------------------------------------------//
     metaData app;
-
+    cuboid test1 = {0};
 
 
     while (!glfwWindowShouldClose(window)) {
@@ -52,7 +53,8 @@ int main() {
         if (ImGui::BeginTabBar("Main tabs")) {
             if (ImGui::BeginTabItem("3d elements")) {
 
-
+                app.bodyHeader("cube 1", width);
+                test1.render();
                 // button stuff ------------------------ //
                 ImGui::Dummy(ImVec2(0.0f, 10.0f));
                 ImGui::SetCursorPosX(marginX);
@@ -81,6 +83,8 @@ int main() {
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         glfwSwapBuffers(window);
     }
+
+    std::cout << test1.a << std::endl;
 
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
