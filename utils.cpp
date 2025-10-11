@@ -94,11 +94,113 @@ void prism::render(std::string idx) {
 
 double pyramid::volume() {
     return 1/3*(a*b*h); }
-void pyramid::render(std::string idx) {}
+void pyramid::render(std::string idx) {
+    float spacing = 5.0f;
+    float inputWidth = ImGui::GetContentRegionAvail().x - 50;// size of input box
+
+    ImGui::SetCursorPosX(marginX);
+    ImGui::Text("a:");
+    ImGui::SameLine();
+    ImGui::PushItemWidth(inputWidth);
+    ImGui::InputDouble(("##apy" + idx).c_str(), &a, 0.1, 1.0, "%.2f");
+    ImGui::PopItemWidth();
+
+    ImGui::SetCursorPosX(marginX);
+    ImGui::Text("b:");
+    ImGui::SameLine();
+    ImGui::PushItemWidth(inputWidth);
+    ImGui::InputDouble(("##bpy" + idx).c_str(), &b, 0.1, 1.0, "%.2f");
+    ImGui::PopItemWidth();
+
+    ImGui::SetCursorPosX(marginX);
+    ImGui::Text("h:");
+    ImGui::SameLine();
+    ImGui::PushItemWidth(inputWidth);
+    ImGui::InputDouble(("##hp" + idx).c_str(), &h, 0.1, 1.0, "%.2f");
+    ImGui::PopItemWidth();
+
+    ImGui::SetCursorPosX(marginX);
+    ImGui::Text("times repeated:");
+    ImGui::SameLine();
+    ImGui::PushItemWidth(inputWidth - 182);
+    ImGui::InputInt(("##rpy" + idx).c_str(), &repeat, 0, 1);
+    ImGui::PopItemWidth();
+
+    ImGui::SetCursorPosX(marginX);
+    std::string tempStr = "total volume : " + std::to_string(volume()) + " x " + std::to_string(repeat);
+    ImGui::Text(tempStr.c_str());
+}
 
 double cylinder::volume() {
     return M_PI*r*r*h; }
-void cylinder::render(std::string idx) {}
+void cylinder::render(std::string idx) {
+    float spacing = 5.0f;
+    float inputWidth = ImGui::GetContentRegionAvail().x - 50;// size of input box
+
+    ImGui::SetCursorPosX(marginX);
+    ImGui::Text("r:");
+    ImGui::SameLine();
+    ImGui::PushItemWidth(inputWidth);
+    ImGui::InputDouble(("##rac" + idx).c_str(), &r, 0.1, 1.0, "%.2f");
+    ImGui::PopItemWidth();
+
+    ImGui::SetCursorPosX(marginX);
+    ImGui::Text("h:");
+    ImGui::SameLine();
+    ImGui::PushItemWidth(inputWidth);
+    ImGui::InputDouble(("##hc" + idx).c_str(), &h, 0.1, 1.0, "%.2f");
+    ImGui::PopItemWidth();
+
+    ImGui::SetCursorPosX(marginX);
+    ImGui::Text("times repeated:");
+    ImGui::SameLine();
+    ImGui::PushItemWidth(inputWidth - 182);
+    ImGui::InputInt(("##rc" + idx).c_str(), &repeat, 0, 1);
+    ImGui::PopItemWidth();
+
+    ImGui::SetCursorPosX(marginX);
+    std::string tempStr = "total volume : " + std::to_string(volume()) + " x " + std::to_string(repeat);
+    ImGui::Text(tempStr.c_str());
+}
+
+double hollowCylinder::volume() {
+    return M_PI*R*R*h - M_PI*r*r*h;}
+void hollowCylinder::render(std::string idx) {
+    float spacing = 5.0f;
+    float inputWidth = ImGui::GetContentRegionAvail().x - 50;// size of input box
+
+    ImGui::SetCursorPosX(marginX);
+    ImGui::Text("R:");
+    ImGui::SameLine();
+    ImGui::PushItemWidth(inputWidth);
+    ImGui::InputDouble(("##Rac" + idx).c_str(), &R, 0.1, 1.0, "%.2f");
+    ImGui::PopItemWidth();
+
+    ImGui::SetCursorPosX(marginX);
+    ImGui::Text("r:");
+    ImGui::SameLine();
+    ImGui::PushItemWidth(inputWidth);
+    ImGui::InputDouble(("##rac" + idx).c_str(), &r, 0.1, 1.0, "%.2f");
+    ImGui::PopItemWidth();
+
+    ImGui::SetCursorPosX(marginX);
+    ImGui::Text("h:");
+    ImGui::SameLine();
+    ImGui::PushItemWidth(inputWidth);
+    ImGui::InputDouble(("##hc" + idx).c_str(), &h, 0.1, 1.0, "%.2f");
+    ImGui::PopItemWidth();
+
+    ImGui::SetCursorPosX(marginX);
+    ImGui::Text("times repeated:");
+    ImGui::SameLine();
+    ImGui::PushItemWidth(inputWidth - 182);
+    ImGui::InputInt(("##rc" + idx).c_str(), &repeat, 0, 1);
+    ImGui::PopItemWidth();
+
+    ImGui::SetCursorPosX(marginX);
+    std::string tempStr = "total volume : " + std::to_string(volume()) + " x " + std::to_string(repeat);
+    ImGui::Text(tempStr.c_str());
+}
 
 double footing1::volume() {
     return a*b*h + A*B*H;}
@@ -111,30 +213,25 @@ void footing1::render(std::string idx) {}
 // app ------------------------------------//
 
 // rendering
+
 void metaData::bodyHeader(std::string text, size_t idx) {
     ImGui::Dummy(ImVec2(0.0f, 10.0f));
     ImGui::SetCursorPosX(marginX);
     if (ImGui::Button(text.c_str(), ImVec2(width - marginX*2.0f - 35.0f, marginX*2.0f))) {}
     ImGui::SameLine(0.0f, 5.0f);
 }
+
 void metaData::TextCentered(std::string text) {
     float windowWidth = ImGui::GetWindowSize().x;
     float textWidth = ImGui::CalcTextSize(text.c_str()).x;
     ImGui::SetCursorPosX((windowWidth - textWidth) * 0.5f);
     ImGui::Text("%s", text.c_str());
 }
+
+
 void metaData::render3D() {
-    ImGui::Dummy(ImVec2(0.0f, 10.0f));
-    TextCentered("cuboid volumes");
 
-    for (size_t i = 0; i < cuboids.size(); i++) {
-        bodyHeader("cube " + std::to_string(i + 1), i);
-        if (ImGui::Button(("x##" + std::to_string(i)).c_str(), ImVec2(marginX*2.0f, marginX*2.0f))) {
-            cuboids.erase(cuboids.begin() + i);}
-        cuboids[i].render(std::to_string(i + 1));
-        ImGui::Dummy(ImVec2(0.0f, 10.0f));
-    }
-
+    renderBlock3d(cuboids, "cube", 20.0f);
 // add new cube button
     ImGui::SetCursorPosX(marginX);
     if (ImGui::Button("+##cuboids", ImVec2(width - marginX*2.0f, marginX*2.0f))) {
