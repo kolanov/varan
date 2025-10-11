@@ -21,7 +21,7 @@ struct cuboid {
 
     int repeat = 1;
     double volume();
-    void render();
+    void render(std::string idx);
 };
 
 struct prism {
@@ -29,8 +29,9 @@ struct prism {
     double b;
     double h;
 
+    int repeat = 1;
     double volume();
-    void render();
+    void render(std::string idx);
 };
 
 struct pyramid {
@@ -38,16 +39,18 @@ struct pyramid {
     double b;
     double h;
 
+    int repeat = 1;
     double volume();
-    void render();
+    void render(std::string idx);
 };
 
 struct cylinder {
     double h;
     double r;
 
+    int repeat = 1;
     double volume();
-    void render();
+    void render(std::string idx);
 };
 
 struct footing1 {
@@ -58,8 +61,9 @@ struct footing1 {
     double B;
     double H;
 
+    int repeat = 1;
     double volume();
-    void render();
+    void render(std::string idx);
 };
 
 struct footing2 {
@@ -70,8 +74,9 @@ struct footing2 {
     double B;
     double H;
 
+    int repeat = 1;
     double volume();
-    void render();
+    void render(std::string idx);
 };
 
 
@@ -92,7 +97,7 @@ struct metaData {
     // wait for next update lil Nigger
 
     //rendering stufff
-    void bodyHeader(std::string text);
+    void bodyHeader(std::string text, size_t idx);
     void TextCentered(std::string text);
     void render3D();
 
