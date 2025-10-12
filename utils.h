@@ -109,18 +109,25 @@ struct metaData {
     //rendering stufff
 
     void bodyHeader(std::string text, size_t idx);
+
     template<typename T>
-    void renderBlock3d(std::vector<T>& Grp, std::string type, float up) {
+    void renderBlock3d(std::vector<T>& Grp, std::string type, float up, int width) {
         ImGui::Dummy(ImVec2(0.0f, up));
         std::string temp = type + " volumes";
         TextCentered(temp);
 
         for (size_t i = 0; i < Grp.size(); i++) {
             bodyHeader(type + " " + std::to_string(i + 1), i);
-            if (ImGui::Button(("x##" + type + std::to_string(i)).c_str(), ImVec2(30.0f, 30.0f))) {
+            if (ImGui::Button(("X##" + type + std::to_string(i)).c_str(), ImVec2(30.0f, 30.0f))) {
                 Grp.erase(Grp.begin() + i);}
             Grp[i].render(std::to_string(i + 1));
             ImGui::Dummy(ImVec2(0.0f, 10.0f));
+        }
+
+        ImGui::SetCursorPosX(30.0f);
+        if (ImGui::Button(("+##" + type).c_str(), ImVec2(width - 30.0f, 30.0f))) {
+            T shap;// default constructor, you can set defaults here
+            Grp.push_back(shap);
         }
     }
 

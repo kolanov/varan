@@ -231,8 +231,9 @@ void metaData::TextCentered(std::string text) {
 
 void metaData::render3D() {
 
-    renderBlock3d(cuboids, "cube", 20.0f);
+    renderBlock3d(cuboids, "cube", 20.0f, width);
 // add new cube button
+/*
     ImGui::SetCursorPosX(marginX);
     if (ImGui::Button("+##cuboids", ImVec2(width - marginX*2.0f, marginX*2.0f))) {
         cuboid cube;        // default constructor, you can set defaults here
@@ -242,7 +243,7 @@ void metaData::render3D() {
         cube.repeat = 1;
         cuboids.push_back(cube);
         std::cout << cuboids.size() << std::endl;
-    }
+    } */
 
 // ---- for prisms ------------ prisms -----------------
     ImGui::Dummy(ImVec2(0.0f, 40.0f));
@@ -257,15 +258,12 @@ void metaData::render3D() {
     }
 
 // add new cube button
+/*
     ImGui::SetCursorPosX(marginX);
     if (ImGui::Button("+##prisms", ImVec2(width - marginX*2.0f, marginX*2.0f))) {
         prism prs;        // default constructor, you can set defaults here
-        prs.a = 1.0;
-        prs.b = 1.0;
-        prs.h = 1.0;
-        prs.repeat = 1;
         prisms.push_back(prs);
-    }
+    } */
 }
 
 
