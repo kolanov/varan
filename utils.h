@@ -15,9 +15,9 @@
 
 // 3d shapes ---------------------------------------//
 struct cuboid {
-    double a = 1.0;
-    double b = 1.0;
-    double h = 1.0;
+    double a = 0.0;
+    double b = 0.0;
+    double h = 0.0;
 
     int repeat = 1;
     double volume();
@@ -25,9 +25,9 @@ struct cuboid {
 };
 
 struct prism {
-    double a;
-    double b;
-    double h;
+    double a = 0.0;
+    double b = 0.0;
+    double h = 0.0;
 
     int repeat = 1;
     double volume();
@@ -35,9 +35,9 @@ struct prism {
 };
 
 struct pyramid {
-    double a;
-    double b;
-    double h;
+    double a = 0.0;
+    double b = 0.0;
+    double h = 0.0;
 
     int repeat = 1;
     double volume();
@@ -45,8 +45,8 @@ struct pyramid {
 };
 
 struct cylinder {
-    double h;
-    double r;
+    double h = 0.0;
+    double r = 0.0;
 
     int repeat = 1;
     double volume();
@@ -54,9 +54,9 @@ struct cylinder {
 };
 
 struct hollowCylinder {
-    double h;
-    double r;
-    double R;
+    double h = 0.0;
+    double r = 0.0;
+    double R = 0.0;
 
     int repeat = 1;
     double volume();
@@ -64,12 +64,12 @@ struct hollowCylinder {
 };
 
 struct footing1 {
-    double a;
-    double b;
-    double h;
-    double A;
-    double B;
-    double H;
+    double a = 0.0;
+    double b = 0.0;
+    double h = 0.0;
+    double A = 0.0;
+    double B = 0.0;
+    double H = 0.0;
 
     int repeat = 1;
     double volume();
@@ -100,6 +100,7 @@ struct metaData {
     std::vector <prism> prisms;
     std::vector <pyramid> pyramids;
     std::vector <cylinder> cylinders;
+    std::vector <hollowCylinder> holowCylinders;
     std::vector <footing1> f1s;
     std::vector <footing2> f2s;
 
@@ -124,7 +125,7 @@ struct metaData {
             ImGui::Dummy(ImVec2(0.0f, 10.0f));
         }
 
-        ImGui::SetCursorPosX(30.0f);
+        ImGui::SetCursorPosX(15.0f);
         if (ImGui::Button(("+##" + type).c_str(), ImVec2(width - 30.0f, 30.0f))) {
             T shap;// default constructor, you can set defaults here
             Grp.push_back(shap);

@@ -92,7 +92,7 @@
 1759860961 /home/kolanov/Desktop/coding /utils/imgui/imstb_textedit.h
 	<string.h>
 
-1760198415 source:/home/kolanov/Desktop/coding /varan/utils.cpp
+1760310050 source:/home/kolanov/Desktop/coding /varan/utils.cpp
 	<GL/glew.h>
 	<GLFW/glfw3.h>
 	<iostream>
@@ -157,7 +157,7 @@
 	<dlfcn.h>
 	<dlfcn.h>
 
-1760309628 /home/kolanov/Desktop/coding /varan/utils.h
+1760310436 /home/kolanov/Desktop/coding /varan/utils.h
 	<GL/glew.h>
 	<GLFW/glfw3.h>
 	<iostream>

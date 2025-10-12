@@ -116,7 +116,7 @@ void pyramid::render(std::string idx) {
     ImGui::Text("h:");
     ImGui::SameLine();
     ImGui::PushItemWidth(inputWidth);
-    ImGui::InputDouble(("##hp" + idx).c_str(), &h, 0.1, 1.0, "%.2f");
+    ImGui::InputDouble(("##hpy" + idx).c_str(), &h, 0.1, 1.0, "%.2f");
     ImGui::PopItemWidth();
 
     ImGui::SetCursorPosX(marginX);
@@ -173,28 +173,28 @@ void hollowCylinder::render(std::string idx) {
     ImGui::Text("R:");
     ImGui::SameLine();
     ImGui::PushItemWidth(inputWidth);
-    ImGui::InputDouble(("##Rac" + idx).c_str(), &R, 0.1, 1.0, "%.2f");
+    ImGui::InputDouble(("##Rahc" + idx).c_str(), &R, 0.1, 1.0, "%.2f");
     ImGui::PopItemWidth();
 
     ImGui::SetCursorPosX(marginX);
     ImGui::Text("r:");
     ImGui::SameLine();
     ImGui::PushItemWidth(inputWidth);
-    ImGui::InputDouble(("##rac" + idx).c_str(), &r, 0.1, 1.0, "%.2f");
+    ImGui::InputDouble(("##rahc" + idx).c_str(), &r, 0.1, 1.0, "%.2f");
     ImGui::PopItemWidth();
 
     ImGui::SetCursorPosX(marginX);
     ImGui::Text("h:");
     ImGui::SameLine();
     ImGui::PushItemWidth(inputWidth);
-    ImGui::InputDouble(("##hc" + idx).c_str(), &h, 0.1, 1.0, "%.2f");
+    ImGui::InputDouble(("##hhc" + idx).c_str(), &h, 0.1, 1.0, "%.2f");
     ImGui::PopItemWidth();
 
     ImGui::SetCursorPosX(marginX);
     ImGui::Text("times repeated:");
     ImGui::SameLine();
     ImGui::PushItemWidth(inputWidth - 182);
-    ImGui::InputInt(("##rc" + idx).c_str(), &repeat, 0, 1);
+    ImGui::InputInt(("##rhc" + idx).c_str(), &repeat, 0, 1);
     ImGui::PopItemWidth();
 
     ImGui::SetCursorPosX(marginX);
@@ -232,38 +232,12 @@ void metaData::TextCentered(std::string text) {
 void metaData::render3D() {
 
     renderBlock3d(cuboids, "cube", 20.0f, width);
-// add new cube button
-/*
-    ImGui::SetCursorPosX(marginX);
-    if (ImGui::Button("+##cuboids", ImVec2(width - marginX*2.0f, marginX*2.0f))) {
-        cuboid cube;        // default constructor, you can set defaults here
-        cube.a = 1.0;
-        cube.b = 1.0;
-        cube.h = 1.0;
-        cube.repeat = 1;
-        cuboids.push_back(cube);
-        std::cout << cuboids.size() << std::endl;
-    } */
+    renderBlock3d(prisms, "prism", 20.0f, width);
+    renderBlock3d(pyramids, "pyramid", 20.0f, width);
+    renderBlock3d(cylinders, "cylinder", 20.0f, width);
+    renderBlock3d(holowCylinders, "hollow cylinder", 20.0f, width);
+    renderBlock3d(f1s, "footing type 1", 20.0f, width);
 
-// ---- for prisms ------------ prisms -----------------
-    ImGui::Dummy(ImVec2(0.0f, 40.0f));
-    TextCentered("prism volumes");
-
-    for (size_t i = 0; i < prisms.size(); i++) {
-        bodyHeader("prism " + std::to_string(i + 1), i);
-        if (ImGui::Button(("x##prisms" + std::to_string(i)).c_str(), ImVec2(marginX*2.0f, marginX*2.0f))) {
-            prisms.erase(prisms.begin() + i);}
-        prisms[i].render(std::to_string(i + 1));
-        ImGui::Dummy(ImVec2(0.0f, 10.0f));
-    }
-
-// add new cube button
-/*
-    ImGui::SetCursorPosX(marginX);
-    if (ImGui::Button("+##prisms", ImVec2(width - marginX*2.0f, marginX*2.0f))) {
-        prism prs;        // default constructor, you can set defaults here
-        prisms.push_back(prs);
-    } */
 }
 
 
