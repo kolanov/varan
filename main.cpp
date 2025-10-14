@@ -31,7 +31,6 @@ int main() {
 
     // testing stuff -----------------------------------------------//
     metaData app;
-    cuboid test1 = {0};
 
 
     while (!glfwWindowShouldClose(window)) {
@@ -66,7 +65,7 @@ int main() {
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("results")) {
-                ImGui::Text("hey nigga");
+                ImGui::Text("wait");
                 ImGui::EndTabItem();
             }
             ImGui::EndTabBar();
@@ -78,8 +77,8 @@ int main() {
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         glfwSwapBuffers(window);
     }
-
-    std::cout << test1.a << std::endl;
+    app.genAns3d();
+    std::cout << app.result3D << std::endl;
 
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();

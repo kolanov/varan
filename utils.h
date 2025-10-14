@@ -22,6 +22,7 @@ struct cuboid {
     int repeat = 1;
     double volume();
     void render(std::string idx);
+    std::string GenAns();
 };
 
 struct prism {
@@ -32,6 +33,7 @@ struct prism {
     int repeat = 1;
     double volume();
     void render(std::string idx);
+    std::string GenAns();
 };
 
 struct pyramid {
@@ -42,6 +44,7 @@ struct pyramid {
     int repeat = 1;
     double volume();
     void render(std::string idx);
+    std::string GenAns();
 };
 
 struct cylinder {
@@ -51,6 +54,7 @@ struct cylinder {
     int repeat = 1;
     double volume();
     void render(std::string idx);
+    std::string GenAns();
 };
 
 struct hollowCylinder {
@@ -61,6 +65,7 @@ struct hollowCylinder {
     int repeat = 1;
     double volume();
     void render(std::string idx);
+    std::string GenAns();
 };
 
 struct footing1 {
@@ -74,6 +79,7 @@ struct footing1 {
     int repeat = 1;
     double volume();
     void render(std::string idx);
+    std::string GenAns();
 };
 
 struct footing2 {
@@ -87,6 +93,7 @@ struct footing2 {
     int repeat = 1;
     double volume();
     void render(std::string idx);
+    std::string GenAns();
 };
 
 
@@ -109,8 +116,11 @@ struct metaData {
 
     //rendering stufff
 
+    // general rendering
     void bodyHeader(std::string text, size_t idx);
+    void TextCentered(std::string text);
 
+    // 3d rendering
     template<typename T>
     void renderBlock3d(std::vector<T>& Grp, std::string type, float up, int width) {
         ImGui::Dummy(ImVec2(0.0f, up));
@@ -131,11 +141,22 @@ struct metaData {
             Grp.push_back(shap);
         }
     }
-
-    void TextCentered(std::string text);
     void render3D();
 
     //result
+    template<typename T>
+    void genAnsBlock(std::vector<T>& Grp) {
+        for (T n : Grp) {
+            result3D += n.GenAns() + "  +  " ;
+        }
+    }
+    template<typename T>
+    void genVolBlock(std::vector<T>& Grp) {
+        for (T n : Grp) {
+            result3D += std::to_string(n.volume()) + "  +  " ;
+        }
+    }
+    void genAns3d();
     std::string result3D;
 
 };

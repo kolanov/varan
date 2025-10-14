@@ -16,6 +16,8 @@
 //3d ----------------------------------------------//
 double cuboid::volume() {
     return a*b*h; }
+std::string cuboid::GenAns() {
+    return std::to_string(a) + " x " + std::to_string(b) + " x " + std::to_string(h); }
 void cuboid::render(std::string idx) {
     float spacing = 5.0f;
     float inputWidth = ImGui::GetContentRegionAvail().x - 50;// size of input box
@@ -55,6 +57,8 @@ void cuboid::render(std::string idx) {
 
 double prism::volume() {
     return 1/2*(a*b*h); }
+std::string prism::GenAns() {
+    return std::string("1/2") + "(" + std::to_string(a) + " x " + std::to_string(b) + " x " + std::to_string(h) + ")"; }
 void prism::render(std::string idx) {
     float spacing = 5.0f;
     float inputWidth = ImGui::GetContentRegionAvail().x - 50;// size of input box
@@ -94,6 +98,8 @@ void prism::render(std::string idx) {
 
 double pyramid::volume() {
     return 1/3*(a*b*h); }
+std::string pyramid::GenAns() {
+    return std::string("1/3") + "(" + std::to_string(a) + " x " + std::to_string(b) + " x " + std::to_string(h) + ")"; }
 void pyramid::render(std::string idx) {
     float spacing = 5.0f;
     float inputWidth = ImGui::GetContentRegionAvail().x - 50;// size of input box
@@ -133,6 +139,8 @@ void pyramid::render(std::string idx) {
 
 double cylinder::volume() {
     return M_PI*r*r*h; }
+std::string cylinder::GenAns() {
+    return std::to_string(r) + " x " + std::to_string(r) + " x " + std::to_string(h) + " x 3.14"; }
 void cylinder::render(std::string idx) {
     float spacing = 5.0f;
     float inputWidth = ImGui::GetContentRegionAvail().x - 50;// size of input box
@@ -165,6 +173,8 @@ void cylinder::render(std::string idx) {
 
 double hollowCylinder::volume() {
     return M_PI*R*R*h - M_PI*r*r*h;}
+std::string hollowCylinder::GenAns() {
+    return std::to_string(R) + " x " + std::to_string(R) + " x " + std::to_string(h) + " x 3.14" + " - " + std::to_string(r) + " x " + std::to_string(r) + " x " + std::to_string(h) + " x 3.14"; }
 void hollowCylinder::render(std::string idx) {
     float spacing = 5.0f;
     float inputWidth = ImGui::GetContentRegionAvail().x - 50;// size of input box
@@ -230,14 +240,29 @@ void metaData::TextCentered(std::string text) {
 
 
 void metaData::render3D() {
-
     renderBlock3d(cuboids, "cube", 20.0f, width);
     renderBlock3d(prisms, "prism", 20.0f, width);
     renderBlock3d(pyramids, "pyramid", 20.0f, width);
     renderBlock3d(cylinders, "cylinder", 20.0f, width);
     renderBlock3d(holowCylinders, "hollow cylinder", 20.0f, width);
     renderBlock3d(f1s, "footing type 1", 20.0f, width);
+}
 
+void metaData::genAns3d() {
+    genAnsBlock(cuboids);
+    genAnsBlock(prisms);
+    genAnsBlock(pyramids);
+    genAnsBlock(cylinders);
+    genAnsBlock(holowCylinders);
+    result3D.erase(result3D.end()-5, result3D.end());
+
+    result3D += "\n= ";
+    genVolBlock(cuboids);
+    genVolBlock(prisms);
+    genVolBlock(pyramids);
+    genVolBlock(cylinders);
+    genVolBlock(holowCylinders);
+    result3D.erase(result3D.end()-5, result3D.end());
 }
 
 
