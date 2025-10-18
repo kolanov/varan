@@ -2,6 +2,8 @@
 #include <GLFW/glfw3.h>
 
 #include <iostream>
+#include <regex>
+#include <string>
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
@@ -12,6 +14,15 @@
 
 float marginX = 15.0;
 int width, height;
+
+std::string cleanNumbers(const std::string& input) {
+    std::string output = input;
+    output = std::regex_replace(output, std::regex(R"((\d+\.\d*?[1-9])0+(?!\d))"), "$1");
+    output = std::regex_replace(output, std::regex(R"((\d+)\.0+(?!\d))"), "$1");
+    output = std::regex_replace(output, std::regex(R"(0\.\d*0+(?!\d))"), "0");
+    return output;
+}
+
 
 
 int main() {
@@ -57,6 +68,7 @@ int main() {
                 ImGui::Dummy(ImVec2(0.0f, 30.0f));
                 ImGui::SetCursorPosX(15.0f);
                 if (ImGui::Button(("confirm##3d"), ImVec2(width - 30.0f, 50.0f))) {
+                    app.result3D = " ";
                     app.genAns3d();
                 }
                 ImGui::EndTabItem();
@@ -66,9 +78,9 @@ int main() {
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("results")) {
-                ImGui::Text(app.result3D.c_str());
+                ImGui::Text(cleanNumbers(app.result3D).c_str());
                 if (ImGui::Button("Copy")) {
-                    ImGui::SetClipboardText(app.result3D.c_str());
+                    ImGui::SetClipboardText(cleanNumbers(app.result3D).c_str());
                 }
                 ImGui::EndTabItem();
             }
