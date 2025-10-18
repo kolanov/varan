@@ -23,7 +23,7 @@ int main() {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
-    io.FontGlobalScale = 2.0f;
+    io.FontGlobalScale = 1.0f;
     (void)io;
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
@@ -51,13 +51,14 @@ int main() {
 
         if (ImGui::BeginTabBar("Main tabs")) {
             if (ImGui::BeginTabItem("3d elements")) {
-                /*
-                app.bodyHeader("cube 1", width);
-                test1.render();
-                */
                 app.render3D();
                 // button stuff ------------------------ //
                 // ------------------------------------ //
+                ImGui::Dummy(ImVec2(0.0f, 30.0f));
+                ImGui::SetCursorPosX(15.0f);
+                if (ImGui::Button(("confirm##3d"), ImVec2(width - 30.0f, 50.0f))) {
+                    app.genAns3d();
+                }
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("2d elements")) {
@@ -65,7 +66,10 @@ int main() {
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("results")) {
-                ImGui::Text("wait");
+                ImGui::Text(app.result3D.c_str());
+                if (ImGui::Button("Copy")) {
+                    ImGui::SetClipboardText(app.result3D.c_str());
+                }
                 ImGui::EndTabItem();
             }
             ImGui::EndTabBar();

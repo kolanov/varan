@@ -47,6 +47,32 @@ struct pyramid {
     std::string GenAns();
 };
 
+struct frustumPyramid {
+    double a = 0.0;
+    double b = 0.0;
+    double A = 0.0;
+    double B = 0.0;
+    double h = 0.0;
+
+    int repeat = 1;
+    double volume();
+    void render(std::string idx);
+    std::string GenAns();
+};
+
+struct frustumConeHollow {
+    double R1 = 0.0;
+    double r1 = 0.0;
+    double R2 = 0.0;
+    double r2 = 0.0;
+    double h = 0.0;
+
+    int repeat = 1;
+    double volume();
+    void render(std::string idx);
+    std::string GenAns();
+};
+
 struct cylinder {
     double h = 0.0;
     double r = 0.0;
@@ -83,12 +109,12 @@ struct footing1 {
 };
 
 struct footing2 {
-    double a;
-    double b;
-    double h;
-    double A;
-    double B;
-    double H;
+    double a = 0.0;
+    double b = 0.0;
+    double h = 0.0;
+    double A = 0.0;
+    double B = 0.0;
+    double H = 0.0;
 
     int repeat = 1;
     double volume();
@@ -106,6 +132,8 @@ struct metaData {
     std::vector <cuboid> cuboids;
     std::vector <prism> prisms;
     std::vector <pyramid> pyramids;
+    std::vector <frustumPyramid> fps;
+    std::vector <frustumConeHollow> fchs;
     std::vector <cylinder> cylinders;
     std::vector <hollowCylinder> holowCylinders;
     std::vector <footing1> f1s;
@@ -125,6 +153,7 @@ struct metaData {
     void renderBlock3d(std::vector<T>& Grp, std::string type, float up, int width) {
         ImGui::Dummy(ImVec2(0.0f, up));
         std::string temp = type + " volumes";
+        ImGui::Separator();
         TextCentered(temp);
 
         for (size_t i = 0; i < Grp.size(); i++) {
@@ -153,8 +182,16 @@ struct metaData {
     template<typename T>
     void genVolBlock(std::vector<T>& Grp) {
         for (T n : Grp) {
-            result3D += std::to_string(n.volume()) + "  +  " ;
+            result3D += std::to_string(n.volume() * n.repeat) + "  +  " ;
         }
+    }
+    template<typename T>
+    double genTotBlock(std::vector<T>& Grp) {
+        double temp = 0.0;
+        for (T n : Grp) {
+            temp += n.volume() * n.repeat;
+        }
+        return temp;
     }
     void genAns3d();
     std::string result3D;
