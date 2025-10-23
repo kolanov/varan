@@ -216,7 +216,7 @@ double frustumConeHollow::volume() {
     return 0.3333*M_PI*h*(R1*R1+r1*r1+r1*R1 - (R2*R2+r2*r2+r2*R2));
 }
 std::string frustumConeHollow::GenAns() {
-    std::string temp = "(1/3)x3.14" + std::to_string(h) + "(" + std::to_string(R1) + "x" + std::to_string(R1) + "+" + std::to_string(r1) + "x" + std::to_string(r1) + "x" + std::to_string(R1) + "x" + std::to_string(r1) + "-" + std::to_string(R2) + "x" + std::to_string(R2) + "-" + std::to_string(r2) + "x" + std::to_string(r2) + "-" + std::to_string(r2) + "x" + std::to_string(R2) + ")";
+    std::string temp = "(1/3)x3.14x" + std::to_string(h) + "(" + std::to_string(R1) + "x" + std::to_string(R1) + "+" + std::to_string(r1) + "x" + std::to_string(r1) + "+" + std::to_string(R1) + "x" + std::to_string(r1) + "-" + std::to_string(R2) + "x" + std::to_string(R2) + "-" + std::to_string(r2) + "x" + std::to_string(r2) + "-" + std::to_string(r2) + "x" + std::to_string(R2) + ")";
     if (repeat == 1) {
         return temp;
     }
@@ -512,7 +512,7 @@ void metaData::render3D() {
     renderBlock3d(prisms, "prism", 20.0f, width);
     renderBlock3d(pyramids, "pyramid", 20.0f, width);
     renderBlock3d(fps, "frustum of pyramid", 20.0f, width);
-    renderBlock3d(fchs, "frustum of hollow cones", 20.0f, width);
+    renderBlock3d(fchs, "hollow frustum of cone", 20.0f, width);
     renderBlock3d(cylinders, "cylinder", 20.0f, width);
     renderBlock3d(holowCylinders, "hollow cylinder", 20.0f, width);
     renderBlock3d(f1s, "footing type 1", 20.0f, width);
