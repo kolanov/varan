@@ -493,7 +493,6 @@ void footing2::render(std::string idx) {
 // app ------------------------------------//
 
 // rendering
-
 void metaData::bodyHeader(std::string text, size_t idx) {
     ImGui::Dummy(ImVec2(0.0f, 10.0f));
     ImGui::SetCursorPosX(marginX);
@@ -508,7 +507,6 @@ void metaData::TextCentered(std::string text) {
     ImGui::Text("%s", text.c_str());
 }
 
-
 void metaData::render3D() {
     renderBlock3d(cuboids, "cube", 20.0f, width);
     renderBlock3d(prisms, "prism", 20.0f, width);
@@ -522,6 +520,8 @@ void metaData::render3D() {
 }
 
 void metaData::genAns3d() {
+    result3D = "\n";
+
     genAnsBlock(cuboids);
     genAnsBlock(prisms);
     genAnsBlock(pyramids);
@@ -531,7 +531,9 @@ void metaData::genAns3d() {
     genAnsBlock(holowCylinders);
     genAnsBlock(f1s);
     genAnsBlock(f2s);
-    result3D.erase(result3D.end()-5, result3D.end());
+
+    if (result3D.size() > 5)
+        result3D.erase(result3D.end() - 5, result3D.end());
 
     result3D += "\n\n= ";
     genVolBlock(cuboids);
@@ -543,7 +545,9 @@ void metaData::genAns3d() {
     genVolBlock(holowCylinders);
     genVolBlock(f1s);
     genVolBlock(f2s);
-    result3D.erase(result3D.end()-5, result3D.end());
+
+    if (result3D.size() > 5)
+        result3D.erase(result3D.end() - 5, result3D.end());
 
     result3D += "\n\n= ";
     double total = 0.0;
@@ -556,7 +560,11 @@ void metaData::genAns3d() {
     total += genTotBlock(holowCylinders);
     total += genTotBlock(f1s);
     total += genTotBlock(f2s);
+
     result3D += std::to_string(total);
+
+    if (result3D.empty() || result3D == "\n")
+        result3D = "No 3D result generated — please enter values.";
 }
 
 

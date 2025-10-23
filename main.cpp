@@ -65,12 +65,6 @@ int main() {
                 app.render3D();
                 // button stuff ------------------------ //
                 // ------------------------------------ //
-                ImGui::Dummy(ImVec2(0.0f, 30.0f));
-                ImGui::SetCursorPosX(15.0f);
-                if (ImGui::Button(("confirm##3d"), ImVec2(width - 30.0f, 50.0f))) {
-                    app.result3D = " ";
-                    app.genAns3d();
-                }
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("2d elements")) {
@@ -78,10 +72,14 @@ int main() {
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("results")) {
-                ImGui::Text(cleanNumbers(app.result3D).c_str());
                 if (ImGui::Button("Copy")) {
                     ImGui::SetClipboardText(cleanNumbers(app.result3D).c_str());
                 }
+                ImGui::SameLine();
+                if (ImGui::Button("calculate##3d")) {
+                    app.genAns3d();
+                }
+                ImGui::Text("%s", cleanNumbers(app.result3D).c_str());
                 ImGui::EndTabItem();
             }
             ImGui::EndTabBar();
